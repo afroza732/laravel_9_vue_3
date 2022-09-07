@@ -25,7 +25,7 @@ class AuthController extends Controller
                     'success' => false,
                     'message' => 'validation error',
                     'errors' => $validateUser->errors()
-                ], 401);
+                ], 201);
             }
 
             $user = User::create([
@@ -44,7 +44,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $th->getMessage()
-            ], 500);
+            ], 201);
         }
     }
 
@@ -61,7 +61,7 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'validation error',
-                    'errors' => $validateUser->errors()
+                    'errors'  => $validateUser->errors()
                 ], 201);
             }
 
