@@ -39,6 +39,7 @@
 import axios from 'axios';
 import {reactive, ref} from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 export default {
     setup(){
 		let form = reactive({
@@ -47,11 +48,12 @@ export default {
 		});
 		let errors = ref([]);
 		const router = useRouter();
+		const store = useStore();
 		const login = async() => {
 			await axios.post('api/login',form)
 			.then(res=>{
 				if(res.data.success == true){
-					localStorage.setItem('token',res.data.token)
+					store.dispatch('set_token',res.data.token);
 					router.push({name : 'Dashboard'})
 				}
 				errors.value = res.data.errors;
